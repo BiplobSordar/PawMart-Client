@@ -4,10 +4,11 @@ import { Mail, Lock, Chrome, Github } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { handleError } from "../utils/handleError";
+import api from "../axios/axiosConfig";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { login, loginWithGoogle, loginWithGithub, error, setError, loading, setLoading } = useAuth();
+  const { login, loginWithGoogle, loginWithGithub, error, setError, loading, setLoading, logout } = useAuth();
 
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -18,12 +19,19 @@ const SignIn = () => {
     setLoading(true);
     setError("");
     try {
-      await login(form.email, form.password);
+      const result = await login(form.email, form.password);
+      console.log(result?.user)
+      if (result?.user?.accessToken) {
+
+        await api.post('/users/login')
+      }
       toast.success("Logged in successfully! ");
       navigate("/");
     } catch (err) {
+      console.log(err)
       setError(handleError(err));
       toast.error(handleError(err));
+      logout()
     } finally {
       setLoading(false);
     }
@@ -32,12 +40,17 @@ const SignIn = () => {
   const handleGoogle = async () => {
     setLoading(true);
     try {
-      await loginWithGoogle();
+      const result = await loginWithGoogle();
+   if (result?.user?.accessToken) {
+
+        await api.post('/users/login')
+      }
       toast.success("Logged in with Google! ");
       navigate("/");
     } catch (err) {
       setError(handleError(err));
       toast.error(handleError(err));
+      logout()
     } finally {
       setLoading(false);
     }
@@ -46,12 +59,17 @@ const SignIn = () => {
   const handleGithub = async () => {
     setLoading(true);
     try {
-      await loginWithGithub();
+      const result = await loginWithGithub();
+      if (result?.user?.accessToken) {
+
+        await api.post('/users/login')
+      }
       toast.success("Logged in with GitHub! 🐱");
       navigate("/");
     } catch (err) {
       setError(handleError(err));
       toast.error(handleError(err));
+      logout()
     } finally {
       setLoading(false);
     }

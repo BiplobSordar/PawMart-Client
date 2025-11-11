@@ -4,6 +4,7 @@ import { User, Mail, Lock, Image, Chrome, Github } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import toast from "react-hot-toast";
 import { handleError } from '../utils/handleError.js'
+import api from "../axios/axiosConfig.js";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -21,9 +22,14 @@ const SignUp = () => {
     try {
       console.log(form, 'this i sthe from value')
       const result = await signUp(form?.email, form.password, form?.name, form.photoURL);
+      if (result?.user?.accessToken) {
+
+        await api.post('/users', { name: form?.name, avatar: form?.photoURL })
+      }
       setUser(result?.user)
       toast.success("Registration successful! 🎉");
-      navigate("/");
+      logout()
+      navigate("/signin");
 
     } catch (err) {
       console.log(err, 'thsi is ht error')
@@ -39,12 +45,16 @@ const SignUp = () => {
     setLoading(true);
     try {
       const result = await loginWithGoogle();
-      setUser(result?.user)
-      toast.success("Registered with Google! 🐶");
+    if (result?.user?.accessToken) {
+
+        await api.post('/users/login')
+      }
+      toast.success("Logged in with Google! ");
       navigate("/");
     } catch (err) {
-      setError(handleError(err))
-      toast.error(handleError(err))
+      setError(handleError(err));
+      toast.error(handleError(err));
+      logout()
     } finally {
       setLoading(false);
     }
@@ -54,16 +64,21 @@ const SignUp = () => {
     setLoading(true);
     try {
       const result = await loginWithGithub();
-      setUser(result?.user)
-      toast.success("Registered with GitHub! 🐱");
+      if (result?.user?.accessToken) {
+
+        await api.post('/users/login')
+      }
+      toast.success("Logged in with GitHub! 🐱");
       navigate("/");
     } catch (err) {
-      setError(handleError(err))
-      toast.error(handleError(err))
+      setError(handleError(err));
+      toast.error(handleError(err));
+      logout()
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] flex justify-center items-center px-4">
