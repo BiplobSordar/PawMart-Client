@@ -1,19 +1,61 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, Github, Chrome } from "lucide-react";
+import { Mail, Lock, Chrome, Github } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
+import { handleError } from "../utils/handleError";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { login, loginWithGoogle, loginWithGithub, error, setError, loading, setLoading } = useAuth();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      await login(form.email, form.password);
+      toast.success("Logged in successfully! ");
+      navigate("/");
+    } catch (err) {
+      setError(handleError(err));
+      toast.error(handleError(err));
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const handleGoogle = async () => {
+    setLoading(true);
+    try {
+      await loginWithGoogle();
+      toast.success("Logged in with Google! ");
+      navigate("/");
+    } catch (err) {
+      setError(handleError(err));
+      toast.error(handleError(err));
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
+  const handleGithub = async () => {
+    setLoading(true);
+    try {
+      await loginWithGithub();
+      toast.success("Logged in with GitHub! 🐱");
+      navigate("/");
+    } catch (err) {
+      setError(handleError(err));
+      toast.error(handleError(err));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] flex justify-center items-center px-4">
@@ -24,7 +66,7 @@ const SignIn = () => {
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        <form  className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex items-center border rounded-lg px-3">
             <Mail className="text-primary" />
             <input
@@ -47,6 +89,7 @@ const SignIn = () => {
               className="w-full p-2 outline-none"
             />
           </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -58,13 +101,13 @@ const SignIn = () => {
 
         <div className="flex flex-col mt-6 space-y-3">
           <button
-            
+            onClick={handleGoogle}
             className="flex items-center justify-center gap-2 border border-primary py-2 rounded-lg hover:bg-primary hover:text-white transition"
           >
             <Chrome /> Sign in with Google
           </button>
           <button
-           
+            onClick={handleGithub}
             className="flex items-center justify-center gap-2 border border-primary py-2 rounded-lg hover:bg-primary hover:text-white transition"
           >
             <Github /> Sign in with GitHub

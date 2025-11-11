@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
-const Navbar = ({ user = false, loading }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dashboardOpen, setDashboardOpen] = useState(false);
+
+  const {user,loading,logout}=useAuth()
 
   const navLinksBeforeLogin = [
     { name: "Home", to: "/" },
@@ -27,7 +30,7 @@ const Navbar = ({ user = false, loading }) => {
     <nav className="bg-gradient-to-r from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] shadow-lg fixed w-full z-50">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Left: Logo + Name */}
+         
           <Link to={"/"}>
             <div className="flex items-center cursor-pointer space-x-2">
               <img
@@ -41,7 +44,7 @@ const Navbar = ({ user = false, loading }) => {
             </div>
           </Link>
 
-          {/* Middle: Links */}
+        
           <div className="hidden md:flex items-center space-x-6">
             {(user ? navLinksAfterLogin : navLinksBeforeLogin).map((link) => (
               <Link
@@ -53,7 +56,7 @@ const Navbar = ({ user = false, loading }) => {
               </Link>
             ))}
 
-            {/* Dashboard dropdown for md */}
+       
             {user && (
               <div className="relative md:block lg:hidden">
                 <button
@@ -81,7 +84,6 @@ const Navbar = ({ user = false, loading }) => {
               </div>
             )}
 
-            {/* Dashboard links on large screens */}
             <div className="hidden lg:flex space-x-6">
               {user &&
                 dashboardLinks.map((link) => (
@@ -96,7 +98,6 @@ const Navbar = ({ user = false, loading }) => {
             </div>
           </div>
 
-          {/* Right: Auth/Profile */}
           <div className="hidden md:flex items-center space-x-4 relative">
             {!user && !loading ? (
               <>
@@ -122,7 +123,7 @@ const Navbar = ({ user = false, loading }) => {
                   className="flex items-center space-x-2 px-2 py-1 bg-white/20 rounded-full hover:bg-white/30 transition"
                 >
                   <img
-                    src={user.avatar || "/default-avatar.png"}
+                    src={user.avatar || "/user.avif"}
                     alt="Profile"
                     className="h-9 w-9 rounded-full border-2 border-white"
                   />
@@ -141,7 +142,7 @@ const Navbar = ({ user = false, loading }) => {
                     <button
                       className="w-full text-left px-4 py-2 text-[#3A3A3A] hover:bg-[#FF8C42] hover:text-white rounded-lg transition"
                       onClick={() => {
-                        console.log("Logout");
+                        logout()
                         setDropdownOpen(false);
                       }}
                     >
@@ -153,7 +154,7 @@ const Navbar = ({ user = false, loading }) => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          
           <div className="md:hidden flex items-center">
             <button onClick={() => setIsOpen(true)} className="text-[#3A3A3A]">
               <Menu size={28} />
@@ -162,8 +163,6 @@ const Navbar = ({ user = false, loading }) => {
         </div>
       </div>
 
-      {/* Mobile Menu + Overlay */}
-      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
@@ -171,7 +170,6 @@ const Navbar = ({ user = false, loading }) => {
         ></div>
       )}
 
-      {/* Slide-out Menu */}
       <div
         className={`fixed top-0 right-0 h-screen w-64 bg-gradient-to-b from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] shadow-xl transform transition-transform duration-300 z-50
           ${isOpen ? "translate-x-0" : "translate-x-full"}`}
@@ -219,7 +217,7 @@ const Navbar = ({ user = false, loading }) => {
             <>
               <Link
                 to="/profile"
-                className="text-[#3A3A3A] font-semibold text-lg hover:text-white transition"
+                className="text-[#3A3A3A] font-semibold text-lg my-2 hover:text-white transition"
                 onClick={() => setIsOpen(false)}
               >
                 Profile
@@ -227,7 +225,7 @@ const Navbar = ({ user = false, loading }) => {
               <button
                 className="text-[#3A3A3A] font-semibold text-lg hover:text-white transition text-left"
                 onClick={() => {
-                  console.log("Logout");
+                  logout();
                   setIsOpen(false);
                 }}
               >
