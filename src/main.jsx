@@ -7,19 +7,22 @@ import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 import { Toaster } from "react-hot-toast";
 import { CategoryProvider } from "./context/CategoryContext";
+import { ProductProvider } from "./context/ProductContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <CategoryProvider>
-      <RouterProvider router={router} />
+        <ProductProvider>
+          <RouterProvider router={router} />
+        </ProductProvider>
       </CategoryProvider>
       <Toaster
         position="top-right"
         reverseOrder={false}
         gutter={12}
         containerStyle={{
-          top: 80, 
+          top: 80,
           right: 16,
         }}
         toastOptions={{

@@ -9,6 +9,7 @@ const ProductCard = ({ item }) => {
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300 flex flex-col">
 
+     
       <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 xl:h-64 2xl:h-72 overflow-hidden bg-gray-100 flex items-center justify-center">
         {!imgError ? (
           <img
@@ -23,14 +24,14 @@ const ProductCard = ({ item }) => {
           </div>
         )}
 
-     
+      
         {item.category && (
           <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-[#FF8C42] text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full shadow-md">
-            {item.category}
+            {item.category?.name}
           </div>
         )}
 
-    
+     
         {item.sell && (
           <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-yellow-400 text-white p-1 sm:p-2 rounded-full shadow-md">
             <ShoppingCart size={16} />
@@ -43,6 +44,13 @@ const ProductCard = ({ item }) => {
           {item.name}
         </h3>
 
+        
+        {item.breed && (
+          <p className="text-sm sm:text-base text-gray-500 line-clamp-1">
+            Breed: {item.breed}
+          </p>
+        )}
+
         <div className="flex justify-between items-center text-xs sm:text-sm md:text-sm lg:text-base text-gray-600">
           <div className="flex items-center gap-1 sm:gap-2">
             <DollarSign size={14} className="text-primary sm:text-[16px]" />
@@ -54,10 +62,10 @@ const ProductCard = ({ item }) => {
           </div>
         </div>
 
-       
+
         <div className="flex justify-center mt-2">
           <button
-            onClick={() => navigate(`/listing/${item.id}`)}
+            onClick={() => navigate(`/listing/${item._id}`)}
             className="bg-primary text-white font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-accent transition-colors text-sm sm:text-base md:text-base"
           >
             View Details

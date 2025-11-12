@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const navLinksAfterLogin = [
     { name: "Home", to: "/" },
-    { name: "Pets & Supplies", to: "/pets" },
+    { name: "Pets & Supplies", to: "/pets-supplies" },
   ];
 
   const dashboardLinks = [

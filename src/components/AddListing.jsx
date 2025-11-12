@@ -8,10 +8,10 @@ import { handleError } from "../utils/handleError";
 
 const AddListing = () => {
   const { user } = useAuth();
-  const {categories}=useCategory()
+  const { categories } = useCategory()
 
- 
-  const [mode, setMode] = useState("product"); 
+
+  const [mode, setMode] = useState("product");
 
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +29,7 @@ const AddListing = () => {
 
   const [loading, setLoading] = useState(false);
 
-  
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,10 +46,10 @@ const AddListing = () => {
         sellerUid: user?.uid,
       };
 
-   
 
 
-     await storeProduct(payload)
+
+      await storeProduct(payload)
       toast.success(`${mode === "pet" ? "Pet" : "Product"} added successfully! 🐾`);
 
       setForm({
@@ -64,6 +64,7 @@ const AddListing = () => {
         age: "",
         breed: "",
         stock: "",
+       
       });
     } catch (error) {
       console.error(error);
@@ -81,35 +82,36 @@ const AddListing = () => {
           {mode === "pet" ? "Add Pet for Adoption" : "Add New Product"}
         </h1>
 
-        
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            type="button"
-            onClick={() => setMode("product")}
-            className={`px-6 py-2 rounded-xl font-semibold border ${
-              mode === "product"
-                ? "bg-primary text-white border-primary"
-                : "bg-white text-gray-700 border-gray-300"
-            } transition`}
-          >
-            🛒 Add Product
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode("pet")}
-            className={`px-6 py-2 rounded-xl font-semibold border ${
-              mode === "pet"
-                ? "bg-primary text-white border-primary"
-                : "bg-white text-gray-700 border-gray-300"
-            } transition`}
-          >
-            🐾 Add Pet
-          </button>
-        </div>
+
+       <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8">
+  <button
+    type="button"
+    onClick={() => setMode("product")}
+    className={`w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-xl font-semibold border text-sm sm:text-base transition-all duration-300 ${
+      mode === "product"
+        ? "bg-primary text-white border-primary shadow-md scale-105"
+        : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+    }`}
+  >
+    🛒 Add Product
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setMode("pet")}
+    className={`w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-xl font-semibold border text-sm sm:text-base transition-all duration-300 ${
+      mode === "pet"
+        ? "bg-primary text-white border-primary shadow-md scale-105"
+        : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+    }`}
+  >
+    🐾 Add Pet
+  </button>
+</div>
 
 
         <form className="space-y-6" onSubmit={handleSubmit}>
-      
+
           <div>
             <label className="block text-gray-700 font-semibold mb-2">Name</label>
             <input
@@ -123,28 +125,28 @@ const AddListing = () => {
             />
           </div>
 
-   
-      
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">
-                Category
-              </label>
-              <select
-                name="category"
-                value={form.category}
-                onChange={handleChange}
-                className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary outline-none"
-                required
-              >
-                <option value="">Select category</option>
-                {categories.map((cat) => (
-                  <option key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-        
+
+
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">
+              Category
+            </label>
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary outline-none"
+              required
+            >
+              <option value="">Select category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
 
           {mode === "product" ? (
             <div>
@@ -179,7 +181,7 @@ const AddListing = () => {
             </div>
           )}
 
-        
+
           {mode === "pet" && (
             <>
               <div className="grid md:grid-cols-2 gap-6">
@@ -209,7 +211,7 @@ const AddListing = () => {
             </>
           )}
 
-         
+
           {mode === "product" && (
             <div>
               <label className="block text-gray-700 font-semibold mb-2">
@@ -223,6 +225,7 @@ const AddListing = () => {
                 placeholder="Enter stock quantity"
                 className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary outline-none"
                 min="0"
+                required
               />
             </div>
           )}
@@ -260,13 +263,14 @@ const AddListing = () => {
               type="text"
               name="image"
               value={form.image}
+              required
               onChange={handleChange}
               placeholder="Paste image URL"
               className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary outline-none"
             />
           </div>
 
-          
+
 
 
           <div>
@@ -280,7 +284,7 @@ const AddListing = () => {
             />
           </div>
 
-        
+
           <button
             type="submit"
             disabled={loading}
