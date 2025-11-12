@@ -8,7 +8,7 @@ const CategorySection = ({ title = "Explore Categories" }) => {
   const { categories, loading }=useCategory()
 
    if (loading) return <CategorySkeleton />;
-   console.log(categories,'thsi is the')
+  
   return (
     <section className="max-w-[1600px] mx-auto px-4 md:px-8 my-20">
     

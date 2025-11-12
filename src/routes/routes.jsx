@@ -10,11 +10,12 @@ import NotFound from "../pages/NotFound";
 import Pets from "../pages/Pets";
 import Products from "../pages/Products";
 import PetDetails from "../pages/PetDetails";
-import ProductDetails from "../pages/ProductDetails";
+
 import Orders from "../pages/Orders";
 
 import PetsSupplies from "../pages/PetsSupplies";
 import AddListing from "../components/AddListing";
+import ListingDetails from "../pages/ListingDetails";
 
 export const router = createBrowserRouter([
   {
@@ -29,12 +30,12 @@ export const router = createBrowserRouter([
       { path: "/pets", element: <Pets /> },
       { path: "/products", element: <Products /> },
       { path: "/pet-details", element: <PetDetails /> },
-      { path: "/product-details", element: <ProductDetails /> },
+    
       { path: "/orders", element: <Orders /> },
       { path: "/cart", element: <Orders /> },
       { path: "/add-listing", element: <AddListing/>},
       { path: "/pets-supplies", element: <PetsSupplies/>},
-      { path: "/listing/:id", element: <ProductDetails/>},
+      { path: "/listing/:id", element: <ListingDetails/>},
     
     ]
   },
