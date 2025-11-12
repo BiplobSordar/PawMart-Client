@@ -10,6 +10,7 @@ export const ProductProvider = ({ children }) => {
     featured: { data: [], loading: false, error: "" },
     latest: { data: [], loading: false, error: "" },
     products: { data: [], loading: false, error: "", page: 1, total: 0 },
+     recommended: { data: [], loading: false, error: "" }
   });
 
  
@@ -84,6 +85,35 @@ export const ProductProvider = ({ children }) => {
       products: { data: [], loading: false, error: "", page: 1, total: 0 },
     });
 
+
+
+    const loadRecommended = async (categoryId) => {
+  setSections((prev) => ({
+    ...prev,
+    recommended: { ...prev.recommended, loading: true, error: "" },
+  }));
+
+  try {
+    
+    const data = await getProducts({
+      category: categoryId,
+    
+      limit: 4,
+    });
+
+    setSections((prev) => ({
+      ...prev,
+      recommended: { ...prev.recommended, data: data.products, loading: false, error: "" },
+    }));
+  } catch (err) {
+    setSections((prev) => ({
+      ...prev,
+      recommended: { ...prev.recommended, loading: false, error: err.message },
+    }));
+  }
+};
+
+
   return (
     <ProductContext.Provider
       value={{
@@ -93,6 +123,7 @@ export const ProductProvider = ({ children }) => {
         loadProducts,
         loadSection,
         resetSections,
+        loadRecommended
       }}
     >
       {children}
