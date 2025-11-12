@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCategory } from "../context/CategoryContext";
+import CategorySkeleton from "./skeletons/CategorySkeleton";
 
-const CategorySection = ({ title = "Explore Categories", categories = [] }) => {
+const CategorySection = ({ title = "Explore Categories" }) => {
+
+  const { categories, loading }=useCategory()
+
+   if (loading) return <CategorySkeleton />;
+   console.log(categories,'thsi is the')
   return (
     <section className="max-w-[1600px] mx-auto px-4 md:px-8 my-20">
     
@@ -19,10 +26,10 @@ const CategorySection = ({ title = "Explore Categories", categories = [] }) => {
           justify-center
         "
       >
-        {categories.map((cat) => (
+        {categories?.map((cat) => (
           <Link
             key={cat.name}
-            to={cat.to}
+            to={'/'}
             className="
               flex flex-col items-center justify-center
               bg-white rounded-2xl shadow-md

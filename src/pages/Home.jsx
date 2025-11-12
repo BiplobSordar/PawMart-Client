@@ -6,13 +6,6 @@ import BannerSlider from "../components/BannerSlider";
 import CategorySection from "../components/CategorySection";
 import RecentListings from "../components/RecentListings";
 
-const categories = [
-  { name: "Pets (Adoption)", emoji: "🐶", to: "/pets" },
-  { name: "Pet Food", emoji: "🍖", to: "/products?category=food" },
-  { name: "Accessories", emoji: "🧸", to: "/products?category=accessories" },
-  { name: "Pet Care Products", emoji: "💊", to: "/products?category=care" },
-
-];
 
 const listings = [
   { 
@@ -96,7 +89,7 @@ const Home = () => {
       <BannerSlider banners={banners}/>
 
     
-    <CategorySection categories={categories}/>
+    <CategorySection />
 
    
     <RecentListings listings={listings}/>
