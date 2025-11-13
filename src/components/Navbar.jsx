@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import api from "../axios/axiosConfig";
+import toast from "react-hot-toast";
+import { handleError } from "../utils/handleError";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +29,19 @@ const Navbar = () => {
     { name: "My Orders", to: "/my-orders" },
   ];
 
+
+
+  const handleLogout =async()=>{
+    try {
+      await api.post('/users/logout')
+       logout() 
+      toast.success('User Logged Out Successfully')
+    } catch (error) {
+      console.log(error)
+      toast.error(handleError(error))
+      
+    }
+  }
   return (
     <nav className="bg-gradient-to-r from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] shadow-lg fixed w-full z-50">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,7 +158,7 @@ const Navbar = () => {
                     <button
                       className="w-full text-left px-4 py-2 text-[#3A3A3A] hover:bg-[#FF8C42] hover:text-white rounded-lg transition"
                       onClick={() => {
-                        logout()
+                         handleLogout();
                         setDropdownOpen(false);
                       }}
                     >
@@ -225,7 +241,7 @@ const Navbar = () => {
               <button
                 className="text-[#3A3A3A] font-semibold text-lg hover:text-white transition text-left"
                 onClick={() => {
-                  logout();
+                 handleLogout()
                   setIsOpen(false);
                 }}
               >

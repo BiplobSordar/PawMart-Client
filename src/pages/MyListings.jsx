@@ -25,6 +25,7 @@ const MyListings = () => {
         setListings(result?.products || []);
         setProductCount(result?.count || 0);
       } catch (error) {
+        console.log(error)
         toast.error(handleError(error));
       } finally {
         setLoading(false);

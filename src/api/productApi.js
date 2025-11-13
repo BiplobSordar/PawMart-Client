@@ -35,6 +35,7 @@ export const getProductById = async (id) => {
 
 export const getMyListings = async () => {
   const response = await api.get(`/products/my-listing`)
+  console.log(response,'thsi si the myListign from api call')
 
   return response?.data
 
