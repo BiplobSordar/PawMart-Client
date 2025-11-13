@@ -14,8 +14,9 @@ import PetDetails from "../pages/PetDetails";
 import Orders from "../pages/Orders";
 
 import PetsSupplies from "../pages/PetsSupplies";
-import AddListing from "../components/AddListing";
+import AddListing from "../pages/AddListing";
 import ListingDetails from "../pages/ListingDetails";
+import MyListings from "../pages/MyListings";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
       { path: "/orders", element: <Orders /> },
       { path: "/cart", element: <Orders /> },
       { path: "/add-listing", element: <AddListing/>},
+      { path: "/my-listings", element: <MyListings/>},
       { path: "/pets-supplies", element: <PetsSupplies/>},
       { path: "/listing/:id", element: <ListingDetails/>},
     

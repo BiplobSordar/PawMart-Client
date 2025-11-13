@@ -41,7 +41,7 @@ const OrderModal = ({ product, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white rounded-3xl w-full max-w-md p-6 md:p-8 shadow-lg relative">
         <h2 className="text-2xl font-bold mb-6">Place Your Order</h2>
         <button

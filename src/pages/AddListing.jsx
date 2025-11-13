@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import { storeProduct } from "../api/productApi";
 import { useCategory } from "../context/CategoryContext";
 import { handleError } from "../utils/handleError";
+import { useNavigate } from "react-router-dom";
 
 const AddListing = () => {
+  const navigate=useNavigate()
   const { user } = useAuth();
   const { categories } = useCategory()
 
@@ -66,6 +68,8 @@ const AddListing = () => {
         stock: "",
        
       });
+      navigate('/my-listings')
+
     } catch (error) {
       console.error(error);
       toast.error(handleError(error));
