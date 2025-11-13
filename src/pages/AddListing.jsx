@@ -6,8 +6,9 @@ import { storeProduct } from "../api/productApi";
 import { useCategory } from "../context/CategoryContext";
 import { handleError } from "../utils/handleError";
 import { useNavigate } from "react-router-dom";
-
+import usePageTitle from '../utils/usePageTitle'
 const AddListing = () => {
+  usePageTitle("Add-Listing | PawMart");
   const navigate=useNavigate()
   const { user } = useAuth();
   const { categories } = useCategory()

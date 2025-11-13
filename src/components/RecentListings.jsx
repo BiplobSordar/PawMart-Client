@@ -1,7 +1,10 @@
 import React from "react";
 import ProductCard from "../components/ProductCard";
+import ProductCardSkeleton from "./skeletons/ProductCardSkeleton";
 
-const RecentListings = ({ listings = [] }) => {
+const RecentListings = ({ listings = [] ,loading}) => {
+
+  
   return (
     <section className="max-w-[1600px] mx-auto px-4 md:px-8 my-20">
       
@@ -18,7 +21,11 @@ const RecentListings = ({ listings = [] }) => {
           place-items-center
         "
       >
-        {listings.map((item) => (
+
+        {loading?Array.from({ length: 3 }).map((_, i) => (
+      <ProductCardSkeleton/>
+    
+    )):listings.map((item) => (
           <ProductCard key={item.id} item={item} />
         ))}
       </div>
@@ -27,3 +34,7 @@ const RecentListings = ({ listings = [] }) => {
 };
 
 export default RecentListings;
+
+
+
+

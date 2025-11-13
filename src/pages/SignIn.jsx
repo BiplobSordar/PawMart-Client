@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, Chrome, Github } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { handleError } from "../utils/handleError";
 import api from "../axios/axiosConfig";
+import usePageTitle from '../utils/usePageTitle'
+
 
 const SignIn = () => {
+  
+  usePageTitle("SignIn | PawMart");
   const navigate = useNavigate();
-  const { login, loginWithGoogle, loginWithGithub, error, setError, loading, setLoading, logout } = useAuth();
+  const { login, loginWithGoogle, loginWithGithub, error, setError, loading, setLoading, logout ,user} = useAuth();
 
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -74,6 +78,13 @@ const SignIn = () => {
       setLoading(false);
     }
   };
+
+
+ 
+    if(user){
+      navigate('/')
+    }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] flex justify-center items-center px-4">

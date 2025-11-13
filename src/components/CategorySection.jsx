@@ -1,11 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import CategorySkeleton from "./skeletons/CategorySkeleton";
+import { useProducts } from "../context/ProductContext";
 
 const CategorySection = ({ title = "Explore Categories" }) => {
 
   const { categories, loading }=useCategory()
+  const {setFilters}=useProducts()
+  const navigate=useNavigate()
+
+  const handleCategoryClick=(categoryId)=>{
+     setFilters((prev) => ({ ...prev, category: categoryId, page: 1 }));
+     navigate('/pets-supplies')
+  }
 
    if (loading) return <CategorySkeleton />;
   
@@ -27,9 +35,9 @@ const CategorySection = ({ title = "Explore Categories" }) => {
         "
       >
         {categories?.map((cat) => (
-          <Link
+          <div
             key={cat.name}
-            to={'/'}
+           onClick={()=>{handleCategoryClick(cat?._id)}}
             className="
               flex flex-col items-center justify-center
               bg-white rounded-2xl shadow-md
@@ -42,7 +50,7 @@ const CategorySection = ({ title = "Explore Categories" }) => {
             <span className="text-base sm:text-lg font-semibold text-gray-800 text-center">
               {cat.name}
             </span>
-          </Link>
+          </div>
         ))}
       </div>
     </section>

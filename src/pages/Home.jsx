@@ -1,62 +1,11 @@
-// src/pages/Home.jsx
-import React from "react";
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+
 import BannerSlider from "../components/BannerSlider";
 import CategorySection from "../components/CategorySection";
 import RecentListings from "../components/RecentListings";
+import usePageTitle from '../utils/usePageTitle'
+import { useProducts } from "../context/ProductContext";
 
 
-const listings = [
-  { 
-    id: 1, 
-    name: "Buddy", 
-    category: "Dog", 
-    price: "Free for Adoption", 
-    location: "Dhaka", 
-    image: "https://placedog.net/400/300?id=1" 
-  },
-  { 
-    id: 2, 
-    name: "Whiskers", 
-    category: "Cat", 
-    price: "$50", 
-    location: "Chittagong", 
-    image: "/pet1.jpg" 
-  },
-  { 
-    id: 3, 
-    name: "Goldie", 
-    category: "Fish", 
-    price: "$10", 
-    location: "Sylhet", 
-    image: "/pet1.jpg" 
-  },
-  { 
-    id: 4, 
-    name: "Bella", 
-    category: "Dog", 
-    price: "Free for Adoption", 
-    location: "Khulna", 
-    image: "https://placedog.net/400/300?id=2" 
-  },
-  { 
-    id: 5, 
-    name: "Milo", 
-    category: "Cat", 
-    price: "$30", 
-    location: "Rajshahi", 
-   image: "/pet1.jpg" 
-  },
-  { 
-    id: 6, 
-    name: "Charlie", 
-    category: "Dog", 
-    price: "$40", 
-    location: "Barishal", 
-    image: "https://placedog.net/401/300?id=3" 
-  },
-];
 const petHeroes = [
   { name: "John Doe", role: "Adopter", img: "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764" },
   { name: "Jane Smith", role: "Pet Caregiver", img: "https://plus.unsplash.com/premium_photo-1669882305273-674eff6567af?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" },
@@ -82,6 +31,12 @@ const banners = [
 ];
 
 const Home = () => {
+  usePageTitle("Home | PawMart");
+
+const {sections}=useProducts()
+const {loading,data}=sections?.latest
+
+
   return (
     <div className=" w-full max-w-[1600px] mx-auto">
 
@@ -92,7 +47,7 @@ const Home = () => {
     <CategorySection />
 
    
-    <RecentListings listings={listings}/>
+    <RecentListings listings={data} loading={loading}/>
 
   
      <section className="bg-gradient-to-r rounded-3xl from-green-100 to-yellow-100 py-16 my-20 px-8 mx-8">

@@ -67,8 +67,8 @@ export const ProductProvider = ({ children }) => {
 
 
   useEffect(() => {
-    loadSection("featured", { featured: true, limit: 4 });
-    loadSection("latest", { sort: "latest", limit: 8 });
+
+    loadSection("latest", { sort: "latest", limit: 3 });
   }, []);
 
 

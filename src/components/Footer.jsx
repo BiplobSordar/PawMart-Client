@@ -6,10 +6,9 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-[#FF8C42] via-[#FFE066] to-[#FFB6B9] w-full text-text shadow-inner ">
       <div className="max-w-[1600px]  mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Top Section */}
+  
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
 
-          {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <img
@@ -26,7 +25,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Useful Links */}
+      
           <div className="space-y-4">
             <h3 className="text-white text-xl font-bold">Useful Links</h3>
             <ul className="space-y-2">
@@ -72,7 +71,7 @@ const Footer = () => {
         {/* Bottom Section: Copyright & Credit */}
         <div className="border-t border-white/30 pt-4 flex flex-col md:flex-row justify-between text-text/70 text-sm">
           <span>&copy; {new Date().getFullYear()} PawMart. All rights reserved.</span>
-          <span>Developed by <span className="font-semibold">Your Name</span></span>
+          <span>Developed by <span className="font-semibold">Biplob Sordar</span></span>
         </div>
       </div>
     </footer>

@@ -4,8 +4,10 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { getMyOrders } from "../api/orderApi";
 import { handleError } from "../utils/handleError";
-
+import usePageTitle from '../utils/usePageTitle'
+import OrdersPDF from "../components/OrdersPDF";
 const MyOrders = () => {
+  usePageTitle("My-Orders | PawMart");
   const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,6 +29,7 @@ const MyOrders = () => {
 
   const renderSkeleton = () => (
     <div className="overflow-x-auto animate-pulse">
+      
       <table className="w-full text-sm md:text-base text-left text-gray-700 border-collapse">
         <thead className="bg-gray-100 text-gray-800 font-semibold">
           <tr>
@@ -69,6 +72,7 @@ const MyOrders = () => {
           </p>
         ) : (
           <div className="overflow-x-auto">
+            <OrdersPDF orders={orders}/>
             <table className="w-full text-sm md:text-base text-left text-gray-700 border-collapse">
               <thead className="bg-gray-100 text-gray-800 font-semibold">
                 <tr>

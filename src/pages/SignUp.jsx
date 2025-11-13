@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Image, Chrome, Github } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import toast from "react-hot-toast";
 import { handleError } from '../utils/handleError.js'
 import api from "../axios/axiosConfig.js";
+import usePageTitle from '../utils/usePageTitle'
+
 
 const SignUp = () => {
+  usePageTitle("SignUp | PawMart");
   const navigate = useNavigate();
   const { user, setUser, loading, setLoading, error, setError, signUp, login, loginWithGoogle, loginWithGithub, logout } = useAuth();
 
@@ -78,6 +81,11 @@ const SignUp = () => {
       setLoading(false);
     }
   };
+
+      if(user){
+        navigate('/')
+      }
+  
 
 
   return (

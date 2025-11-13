@@ -5,8 +5,9 @@ import { useAuth } from "../context/AuthContext";
 import { getMyListings, updateProduct, deleteProduct } from "../api/productApi";
 import { handleError } from "../utils/handleError";
 import { MyListingSkeleton } from "../components/skeletons/MyListingSkeleton";
-
+import usePageTitle from '../utils/usePageTitle'
 const MyListings = () => {
+  usePageTitle("My-Listing | PawMart");
   const { user } = useAuth();
   const [listings, setListings] = useState([]);
   const [editingItem, setEditingItem] = useState(null);

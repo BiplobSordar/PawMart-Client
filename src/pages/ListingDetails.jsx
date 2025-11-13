@@ -8,8 +8,9 @@ import { MapPin, User, Mail } from "lucide-react";
 import { getProductById } from "../api/productApi";
 import { handleError } from "../utils/handleError";
 import OrderModal from "../components/OrderModal";
-
+import usePageTitle from '../utils/usePageTitle'
 const ListingDetails = () => {
+  usePageTitle("ListingDetails | PawMart");
 
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const { id } = useParams();

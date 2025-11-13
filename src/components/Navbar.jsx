@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const navLinksBeforeLogin = [
     { name: "Home", to: "/" },
-    { name: "Pets & Supplies", to: "/pets" },
+    { name: "Pets & Supplies", to: "/pets-supplies" },
   ];
 
   const navLinksAfterLogin = [
@@ -148,13 +148,7 @@ const Navbar = () => {
 
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg py-2 z-50">
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-[#3A3A3A] hover:bg-[#FF8C42] hover:text-white rounded-lg transition"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      Profile
-                    </Link>
+                    
                     <button
                       className="w-full text-left px-4 py-2 text-[#3A3A3A] hover:bg-[#FF8C42] hover:text-white rounded-lg transition"
                       onClick={() => {
@@ -231,13 +225,7 @@ const Navbar = () => {
             <div className="h-12 w-12 rounded-full bg-gray-300 animate-pulse"></div>
           ) : (
             <>
-              <Link
-                to="/profile"
-                className="text-[#3A3A3A] font-semibold text-lg my-2 hover:text-white transition"
-                onClick={() => setIsOpen(false)}
-              >
-                Profile
-              </Link>
+             
               <button
                 className="text-[#3A3A3A] font-semibold text-lg hover:text-white transition text-left"
                 onClick={() => {
