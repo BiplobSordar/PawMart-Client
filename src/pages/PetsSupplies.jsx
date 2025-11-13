@@ -25,7 +25,7 @@ const PetsSupplies = () => {
   useEffect(() => {
     
     loadProducts({ search, category, sort, page, limit });
-  }, [search, category, sort, page, limit,categoryFromUrl]);
+  }, [search, category, sort, page, limit]);
 
   const totalPages = Math.max(1, Math.ceil(total / limit));
 
