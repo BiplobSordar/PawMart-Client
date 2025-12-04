@@ -19,6 +19,8 @@ import ListingDetails from "../pages/ListingDetails";
 import MyListings from "../pages/MyListings";
 import MyOrders from "../pages/MyOrders";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Support from "../pages/Support";
+import ErrorPage from "../pages/Error";
 
 export const router = createBrowserRouter([
   {
@@ -28,8 +30,10 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/support", element: <Support/> },
       { path: "/signin", element: <SignIn /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/error", element: <ErrorPage/> },
 
 
 
@@ -38,7 +42,7 @@ export const router = createBrowserRouter([
       { path: "/add-listing", element: <ProtectedRoute ><AddListing /></ProtectedRoute> },
       { path: "/my-listings", element: <ProtectedRoute ><MyListings /></ProtectedRoute> },
       { path: "/pets-supplies", element: <PetsSupplies /> },
-      { path: "/listing/:id", element: <ProtectedRoute ><ListingDetails /></ProtectedRoute> },
+      { path: "/listing/:id", element: <ListingDetails /> },
 
     ]
   },

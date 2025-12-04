@@ -1,68 +1,53 @@
 import React from "react";
-import usePageTitle from "../utils/usePageTitle";
 
 const About = () => {
-  usePageTitle("About Us | PawMart");
 
+  us
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-16 px-5 md:px-16">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-center text-primary">
+    <div className="bg-[#F8F9FA] min-h-screen px-4 md:px-16 py-12 mt-10">
+
+      <header className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#FF8C42] mb-4">
           About PawMart
         </h1>
-
-        <p className="text-lg sm:text-xl mb-8 text-center text-gray-700 dark:text-gray-300">
-          At PawMart, we believe every pet deserves a loving home. Our mission is to connect loving adopters with pets in need and make adoption easy and joyful.
+        <p className="text-[#2D2D34]/90 text-lg md:text-xl max-w-2xl mx-auto">
+          PawMart is your ultimate platform for pet adoption, pet supplies, and connecting pet lovers. Our mission is to make it easier for pet owners and enthusiasts to find pets, services, and products in one convenient place.
         </p>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-          <div className="flex flex-col justify-center">
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-primary">
-              Our Mission
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              To provide a platform where pets find forever homes and pet lovers can easily adopt or purchase quality pet supplies. We aim to improve pet welfare and support responsible pet ownership.
-            </p>
-          </div>
-          <div className="flex flex-col justify-center">
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-primary">
-              Our Vision
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              A world where every pet has a loving family and all pet owners have access to the best products and care advice. We strive to make adoption and pet care simple, safe, and rewarding.
-            </p>
-          </div>
+     
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 className="text-2xl font-bold text-[#FF8C42] mb-2">Pet Adoption</h3>
+          <p className="text-[#2D2D34]/90">
+            Browse pets available for adoption and give a loving home to furry friends in your community.
+          </p>
         </div>
 
-        <div className="mt-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
-            Meet the Team
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { name: "Alice", role: "Founder", img: "/team1.jpg" },
-              { name: "Bob", role: "Marketing Lead", img: "/team2.jpg" },
-              { name: "Charlie", role: "Operations", img: "/team3.jpg" },
-              { name: "Diana", role: "Community Manager", img: "/team4.jpg" },
-            ].map((member, idx) => (
-              <div
-                key={idx}
-                className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition"
-              >
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-primary">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{member.role}</p>
-              </div>
-            ))}
-          </div>
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 className="text-2xl font-bold text-[#FF8C42] mb-2">Pet Supplies</h3>
+          <p className="text-[#2D2D34]/90">
+            Find high-quality pet products including food, toys, accessories, and healthcare essentials.
+          </p>
         </div>
-      </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 className="text-2xl font-bold text-[#FF8C42] mb-2">Community & Support</h3>
+          <p className="text-[#2D2D34]/90">
+            Connect with other pet lovers, share experiences, and access resources for better pet care.
+          </p>
+        </div>
+      </section>
+
+   
+      <section className="mt-16 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#FF8C42] mb-4">
+          Our Mission
+        </h2>
+        <p className="text-[#2D2D34]/90 max-w-3xl mx-auto text-lg">
+          We aim to simplify pet adoption, make pet products accessible, and build a strong community for pet lovers everywhere. PawMart is committed to improving the lives of pets and their owners by providing a reliable, easy-to-use platform.
+        </p>
+      </section>
     </div>
   );
 };

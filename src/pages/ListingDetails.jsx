@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContext";
 import ProductCard from "../components/ProductCard";
 import ProductDetailsSkeleton from "../components/skeletons/ProductDetailSkeleton";
@@ -9,13 +9,17 @@ import { getProductById } from "../api/productApi";
 import { handleError } from "../utils/handleError";
 import OrderModal from "../components/OrderModal";
 import usePageTitle from '../utils/usePageTitle'
+import RecommendedForYou from "../components/RecommendedForYou";
+import { useAuth } from "../context/AuthContext";
 const ListingDetails = () => {
   usePageTitle("ListingDetails | PawMart");
+  const { user } = useAuth()
 
   const [isOrderOpen, setIsOrderOpen] = useState(false);
+   const navigate = useNavigate()
   const { id } = useParams();
   const { sections, loadRecommended } = useProducts();
-  const { data: recommended, loading: recommendedLoading } = sections.recommended;
+  const { data: recommended, loading: recommendedLoading } = sections?.recommended;
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,6 +49,9 @@ const ListingDetails = () => {
   }, [id]);
 
 
+
+
+
   if (loading) return <ProductDetailsSkeleton />;
 
 
@@ -63,10 +70,20 @@ const ListingDetails = () => {
       </div>
     );
 
+
+  const handleOrderModal = () => {
+    if (user) {
+      setIsOrderOpen(true);
+    } else {
+      navigate("/signin");
+    }
+
+  }
+
   return (
     <div className="min-h-screen px-4 md:px-8 py-10 bg-gray-50 space-y-12">
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-3xl shadow-lg p-6 md:p-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-3xl shadow-lg p-6 md:p-10">
 
         <div className="w-full h-72 md:h-[420px] overflow-hidden rounded-2xl bg-gray-100 flex items-center justify-center">
           <img
@@ -100,9 +117,9 @@ const ListingDetails = () => {
           <p className="text-gray-700 leading-relaxed mt-2">
             {product.description || "No description available."}
           </p>
-          {product?.isPet ? <button onClick={()=>{setIsOrderOpen(true)}} className="mt-6 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-accent transition duration-300 shadow-md">
+          {product?.isPet ? <button onClick={handleOrderModal} className="mt-6 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-accent transition duration-300 shadow-md">
             Adopt
-          </button> : <button onClick={()=>{setIsOrderOpen(true)}} className="mt-6 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-accent transition duration-300 shadow-md">
+          </button> : <button onClick={handleOrderModal} className="mt-6 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-accent transition duration-300 shadow-md">
             Order Now
           </button>}
 
@@ -110,7 +127,7 @@ const ListingDetails = () => {
       </div>
 
 
-      <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-md p-6 md:p-10 mt-10">
+      <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-md p-6 md:p-10 mt-10">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-100 pb-3">
           Seller Information
         </h2>
@@ -163,32 +180,20 @@ const ListingDetails = () => {
       </div>
 
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">
           Recommended for You
         </h2>
 
-        {recommendedLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-          </div>
-        ) : recommended && recommended.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {recommended.slice(0, 4).map((item) => (
-              <ProductCard key={item._id} item={item} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-500">No recommendations found.</p>
-        )}
+        <RecommendedForYou listings={recommended} loading={recommendedLoading} />
+
+
       </div>
       {isOrderOpen && (
 
         <OrderModal
           isOpen={isOrderOpen}
-          onClose={() => setIsOrderOpen(false)}
+          onClose={()=>{setIsOrderOpen(false)}}
           product={product}
 
         />

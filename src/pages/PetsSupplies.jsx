@@ -8,7 +8,7 @@ import usePageTitle from '../utils/usePageTitle'
 import { useSearchParams } from "react-router-dom";
 const PetsSupplies = () => {
   usePageTitle("Pets&Supplies | PawMart");
- 
+
 
 
   const { sections, filters, setFilters, loadProducts } = useProducts();
@@ -23,7 +23,7 @@ const PetsSupplies = () => {
 
 
   useEffect(() => {
-    
+
     loadProducts({ search, category, sort, page, limit });
   }, [search, category, sort, page, limit]);
 
@@ -37,18 +37,16 @@ const PetsSupplies = () => {
       </div>
 
 
-      <section className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
+      <section className="max-w-6xl mx-auto grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
         {loading &&
           Array.from({ length: limit }).map((_, i) => <ProductCardSkeleton key={i} />)}
-
 
         {!loading && error && (
           <p className="col-span-full text-center text-red-500 font-medium bg-red-50 p-4 rounded-xl shadow-sm">
             Failed to load products. Please try again later.
           </p>
         )}
-
 
         {!loading && !error && data.length === 0 && (
           <p className="col-span-full text-center text-gray-600">
@@ -59,6 +57,7 @@ const PetsSupplies = () => {
         {!loading && !error && data.length > 0 &&
           data.map((item) => <ProductCard key={item._id} item={item} />)}
       </section>
+
 
 
       {totalPages > 1 && (

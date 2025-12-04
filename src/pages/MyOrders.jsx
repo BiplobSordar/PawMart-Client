@@ -27,6 +27,9 @@ const MyOrders = () => {
     fetchOrders();
   }, [user]);
 
+
+  
+
   const renderSkeleton = () => (
     <div className="overflow-x-auto animate-pulse">
       
@@ -34,7 +37,7 @@ const MyOrders = () => {
         <thead className="bg-gray-100 text-gray-800 font-semibold">
           <tr>
             <th className="p-4">Listing</th>
-            <th className="p-4">Buyer</th>
+            <th className="p-4">Seller</th>
             <th className="p-4">Price</th>
             <th className="p-4">Quantity</th>
             <th className="p-4">Address</th>
@@ -77,7 +80,7 @@ const MyOrders = () => {
               <thead className="bg-gray-100 text-gray-800 font-semibold">
                 <tr>
                   <th className="p-4">Listing</th>
-                  <th className="p-4">Buyer</th>
+                   <th className="p-4">Seller</th>
                   <th className="p-4">Price</th>
                   <th className="p-4">Quantity</th>
                   <th className="p-4">Address</th>

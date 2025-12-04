@@ -17,18 +17,23 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-16 px-5 md:px-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-center text-primary">
-          Contact Us
-        </h1>
-        <p className="text-center text-gray-700 dark:text-gray-300 mb-10 text-lg sm:text-xl">
-          Have questions or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
-        </p>
+    <div className="bg-[#F8F9FA] min-h-screen py-16 px-4 md:px-16">
+      <div className="max-w-5xl mx-auto">
 
+     
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#FF8C42] mb-4">
+            Contact Us
+          </h1>
+          <p className="text-[#2D2D34]/90 text-lg md:text-xl">
+            Have questions or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+          </p>
+        </div>
+
+     
         <form
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-800 shadow-lg rounded-3xl p-8 flex flex-col gap-5"
+          className="bg-white rounded-3xl shadow-xl p-8 md:p-12 flex flex-col gap-6"
         >
           <input
             type="text"
@@ -36,7 +41,7 @@ const Contact = () => {
             value={form.name}
             onChange={handleChange}
             placeholder="Your Name"
-            className="p-4 rounded-xl border border-gray-300 dark:border-gray-600 outline-none focus:ring-2 focus:ring-primary transition bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="p-4 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-[#FF8C42] transition bg-gray-50 text-[#2D2D34]"
             required
           />
           <input
@@ -45,7 +50,7 @@ const Contact = () => {
             value={form.email}
             onChange={handleChange}
             placeholder="Your Email"
-            className="p-4 rounded-xl border border-gray-300 dark:border-gray-600 outline-none focus:ring-2 focus:ring-primary transition bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="p-4 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-[#FF8C42] transition bg-gray-50 text-[#2D2D34]"
             required
           />
           <textarea
@@ -53,23 +58,33 @@ const Contact = () => {
             value={form.message}
             onChange={handleChange}
             placeholder="Your Message"
-            rows={5}
-            className="p-4 rounded-xl border border-gray-300 dark:border-gray-600 outline-none focus:ring-2 focus:ring-primary transition bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            rows={6}
+            className="p-4 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-[#FF8C42] transition bg-gray-50 text-[#2D2D34]"
             required
           ></textarea>
           <button
             type="submit"
-            className="bg-primary dark:bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-accent dark:hover:bg-accent transition"
+            className="bg-[#FF8C42] text-white font-semibold py-3 rounded-xl hover:bg-[#FFE066] hover:text-[#2D2D34] transition"
           >
             Send Message
           </button>
         </form>
 
-        <div className="mt-12 text-center text-gray-700 dark:text-gray-300">
-          <p>Email: support@pawmart.com</p>
-          <p>Phone: +880 1234 567890</p>
-          <p>Address: Dhaka, Bangladesh</p>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left text-[#2D2D34]/90">
+          <div className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-[#FF8C42] mb-2">Email</h3>
+            <p>support@pawmart.com</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-[#FF8C42] mb-2">Phone</h3>
+            <p>+880 1234 567890</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-[#FF8C42] mb-2">Address</h3>
+            <p>Dhaka, Bangladesh</p>
+          </div>
         </div>
+
       </div>
     </div>
   );

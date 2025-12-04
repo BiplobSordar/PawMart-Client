@@ -33,10 +33,18 @@ button:hover {
   background-color: var(--accent);
 }
 
-/* Card styling */
+
 .card {
   background-color: white;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   padding: 1rem;
+}
+
+
+
+@media (min-width: 1310px) {
+  .grid-xxl-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
