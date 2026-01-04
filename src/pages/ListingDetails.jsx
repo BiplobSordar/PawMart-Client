@@ -4,7 +4,7 @@ import { useProducts } from "../context/ProductContext";
 import ProductCard from "../components/ProductCard";
 import ProductDetailsSkeleton from "../components/skeletons/ProductDetailSkeleton";
 import ProductCardSkeleton from "../components/skeletons/ProductCardSkeleton";
-import { MapPin, User, Mail } from "lucide-react";
+import { MapPin, User, Mail,Phone } from "lucide-react";
 import { getProductById } from "../api/productApi";
 import { handleError } from "../utils/handleError";
 import OrderModal from "../components/OrderModal";

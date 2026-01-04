@@ -8,6 +8,8 @@ import AdoptablePets from "../components/AdoptablePets";
 import RecommendedForYou from "../components/RecommendedForYou";
 import ProductsForSelling from "../components/ProductsForSelling";
 import FeaturedProducts from "../components/FeaturedProducts";
+import CTASection from "../components/Cta";
+import FAQSection from "../components/FAQ";
 
 
 
@@ -157,6 +159,9 @@ const Home = () => {
       </section>
 
       <RecommendedForYou listings={recomemdedData} loading={recomemdedLoading} />
+
+      <CTASection/>
+      <FAQSection/>
 
     </div>
   );

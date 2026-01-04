@@ -2,7 +2,6 @@ import React from "react";
 
 const About = () => {
 
-  us
   return (
     <div className="bg-[#F8F9FA] min-h-screen px-4 md:px-16 py-12 mt-10">
 

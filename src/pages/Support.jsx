@@ -2,7 +2,7 @@ import React from "react";
 import usePageTitle from "../utils/usePageTitle";
 
 const Support = () => {
-   usePageTitle(`${errorCode} | PawMart`);
+   usePageTitle(`PawMart`);
    
   return (
     <div className="bg-[#F8F9FA] min-h-screen px-4 md:px-16 py-12">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import api from "../axios/axiosConfig";
@@ -7,18 +7,20 @@ import toast from "react-hot-toast";
 import { handleError } from "../utils/handleError";
 
 const Navbar = () => {
+  const navigate=useNavigate()
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dashboardOpen, setDashboardOpen] = useState(false);
 
   const { user, loading, logout } = useAuth();
 
+
   const navLinksBeforeLogin = [
     { name: "Home", to: "/" },
     { name: "Pets & Supplies", to: "/pets-supplies" },
-    {name:'Contact',to:'/contact'},
-    {name:'About',to:'/about'},
-    {name:'Support',to:'/support'},
+    { name: 'Contact', to: '/contact' },
+    { name: 'About', to: '/about' },
+    { name: 'Support', to: '/support' },
   ];
 
   const navLinksAfterLogin = [
@@ -59,7 +61,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          
+
           <div className="hidden md:flex items-center space-x-6">
             {(user ? navLinksAfterLogin : navLinksBeforeLogin).map((link) => (
               <Link
@@ -71,7 +73,7 @@ const Navbar = () => {
               </Link>
             ))}
 
-           
+
             {user && (
               <div className="relative md:block lg:hidden">
                 <button
@@ -99,7 +101,7 @@ const Navbar = () => {
               </div>
             )}
 
-     
+
             <div className="hidden lg:flex space-x-6">
               {user &&
                 dashboardLinks.map((link) => (
@@ -114,7 +116,7 @@ const Navbar = () => {
             </div>
           </div>
 
-  
+
           <div className="hidden md:flex items-center space-x-4 relative">
             {!user && !loading ? (
               <>
@@ -148,9 +150,29 @@ const Navbar = () => {
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-44 bg-[#F8F9FA] rounded-xl shadow-lg py-2 z-50">
-                    <button
+                  <div className="absolute right-0 mt-2 w-44 bg-transparent rounded-xl shadow-lg py-2 z-50 px-3">
+                     <button
                       className="w-full text-left px-4 py-2 text-[#2D2D34] hover:bg-[#FFE066] hover:text-[#ffffff] rounded-lg transition"
+                      onClick={() => {
+                        navigate('/dashboard')
+                        
+                        setDropdownOpen(false);
+                      }}
+                    >
+                     Dashboard
+                    </button>
+                    
+                     <button
+                      className="w-full text-left px-4 py-2 mt-2 text-[#2D2D34] hover:bg-[#FFE066] hover:text-[#ffffff] rounded-lg transition"
+                      onClick={() => {
+                     navigate('/my-profile')
+                        setDropdownOpen(false);
+                      }}
+                    >
+                     Profile
+                    </button>
+                    <button
+                      className="w-full text-left mt-2 px-4 py-2 text-[#2D2D34] hover:bg-[#FFE066] hover:text-[#ffffff] rounded-lg transition"
                       onClick={() => {
                         handleLogout();
                         setDropdownOpen(false);
@@ -158,20 +180,21 @@ const Navbar = () => {
                     >
                       Logout
                     </button>
+                   
                   </div>
                 )}
               </div>
             )}
           </div>
 
-        
+
           <button onClick={() => setIsOpen(true)} className="md:hidden text-[#2D2D34]">
             <Menu size={28} />
           </button>
         </div>
       </div>
 
-    
+
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
@@ -179,69 +202,69 @@ const Navbar = () => {
         ></div>
       )}
 
-   
-     <div
-  className={`fixed top-0 right-0 h-screen w-64 bg-[#FF8C42] shadow-xl transform transition-transform duration-300 z-50
+
+      <div
+        className={`fixed top-0 right-0 h-screen w-64 bg-[#FF8C42] shadow-xl transform transition-transform duration-300 z-50
     ${isOpen ? "translate-x-0" : "translate-x-full"}`}
->
-
-  <div className="flex justify-end p-4">
-    <button
-      onClick={() => setIsOpen(false)}
-      className="text-[#2D2D34] hover:text-[#FFE066] transition"
-    >
-      <X size={28} />
-    </button>
-  </div>
-
- 
-  <div className="flex flex-col items-start mt-8 space-y-4 px-6">
-    {(user ? [...navLinksAfterLogin, ...dashboardLinks] : navLinksBeforeLogin).map(
-      (link) => (
-        <Link
-          key={link.name}
-          to={link.to}
-          className="w-full text-[#2D2D34] font-semibold text-lg px-4 py-3 rounded-xl hover:bg-[#FFE066] hover:text-[#FF8C42] transition flex justify-center"
-          onClick={() => setIsOpen(false)}
-        >
-          {link.name}
-        </Link>
-      )
-    )}
-  </div>
-
- 
-  <div className="absolute bottom-10 left-6 right-6 flex flex-col gap-4">
-    {!user && !loading ? (
-      <>
-        <Link
-          to="/signin"
-          className="w-full bg-white text-[#FF8C42] font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#FF8C42] transition text-center"
-          onClick={() => setIsOpen(false)}
-        >
-          Login
-        </Link>
-        <Link
-          to="/signup"
-          className="w-full bg-[#2D2D34] text-white font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#2D2D34] transition text-center"
-          onClick={() => setIsOpen(false)}
-        >
-          Register
-        </Link>
-      </>
-    ) : (
-      <button
-        className="w-full bg-white text-[#FF8C42] font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#FF8C42] transition"
-        onClick={() => {
-          handleLogout();
-          setIsOpen(false);
-        }}
       >
-        Logout
-      </button>
-    )}
-  </div>
-</div>
+
+        <div className="flex justify-end p-4">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-[#2D2D34] hover:text-[#FFE066] transition"
+          >
+            <X size={28} />
+          </button>
+        </div>
+
+
+        <div className="flex flex-col items-start mt-8 space-y-4 px-6">
+          {(user ? [...navLinksAfterLogin, ...dashboardLinks] : navLinksBeforeLogin).map(
+            (link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                className="w-full text-[#2D2D34] font-semibold text-lg px-4 py-3 rounded-xl hover:bg-[#FFE066] hover:text-[#FF8C42] transition flex justify-center"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            )
+          )}
+        </div>
+
+
+        <div className="absolute bottom-10 left-6 right-6 flex flex-col gap-4">
+          {!user && !loading ? (
+            <>
+              <Link
+                to="/signin"
+                className="w-full bg-white text-[#FF8C42] font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#FF8C42] transition text-center"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="w-full bg-[#2D2D34] text-white font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#2D2D34] transition text-center"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <button
+              className="w-full bg-white text-[#FF8C42] font-bold px-4 py-3 rounded-xl shadow hover:bg-[#FFE066] hover:text-[#FF8C42] transition"
+              onClick={() => {
+                handleLogout();
+                setIsOpen(false);
+              }}
+            >
+              Logout
+            </button>
+          )}
+        </div>
+      </div>
 
     </nav>
   );
